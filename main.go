@@ -49,13 +49,18 @@ func main() {
 			return
 		}
 
-		if !re.MatchString(link) {
+		if !re.MatchString(link) && link != "" {
 			fmt.Println("ERROR: input file contains wrong string pattern")
+			fmt.Printf("%q\n", link)
 			return
 		}
 	}
 
 	for _, link := range links {
+		if link == "" {
+			continue
+		}
+
 		in := re.ReplaceAllString(link, "${1}")
 		out := re.ReplaceAllString(link, "${2}")
 
